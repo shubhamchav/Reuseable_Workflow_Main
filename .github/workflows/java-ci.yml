@@ -1,18 +1,20 @@
-name: Reusable Echo Workflow
+name: Reusable Workflow
 
 on:
   workflow_call:
 
 jobs:
-  demo:
+  echo:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Step 1
-        run: echo "Hello from reusable workflow 👋"
+      - run: echo "Echo job"
 
-      - name: Step 2
-        run: echo "This workflow is shared across repositories"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Build job"
 
-      - name: Step 3
-        run: echo "No Java, no Maven, no duplication"
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test job"
