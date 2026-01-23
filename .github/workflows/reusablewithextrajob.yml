@@ -1,0 +1,22 @@
+name: CI With Secrets
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pre-build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This runs BEFORE reusable workflow"
+
+  build:
+    needs: pre-build
+    uses: shubhamchav/Reuseable_Workflow_Main/.github/workflows/mainfilewithsecret.yml@master
+    secrets:
+      MY_SECRET: ${{ secrets.MY_SECRET }}
+
+  post-build:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This runs AFTER reusable workflow"
